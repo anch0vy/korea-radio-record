@@ -8,7 +8,7 @@ from radio_util import checkAndMakeDir
 dirs = ['1radio','cbs','channelm','coolfm','happyfm','lovefm','mbcfm4u','mbcradio','powerfm']
 
 def convert(dir,inputList,outputName,delete=False):
-	ret = call(['ffmpeg','-loglevel','warning','-y','-i','concat:%s'%('|'.join(inputList)),'-codec','copy',os.path.join(dir,outputName)])
+	ret = call(['ffmpeg','-loglevel','warning','-y','-i','concat:%s'%('|'.join(inputList)),'-codec','libfdk_aac',os.path.join(dir,outputName)])
 	if ret==0 and delete:
 		for fileName in inputList:
 			os.remove(fileName)
@@ -43,7 +43,7 @@ def selectAndConvert(basedir):
 		inputList.sort()
 		dir = os.path.join(x,'..','..')
 		dir = os.path.normpath(dir)
-		outputName = x.split('/')[-1]+ '.' + inputList[0].split('.')[-1]
+		outputName = x.split('/')[-1]+ '.aac'
 		print dir,outputName
 		if convert(dir,inputList,outputName,delete=True) == True:
 			os.rmdir(os.path.dirname(inputList[0]))
