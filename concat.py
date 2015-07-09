@@ -53,8 +53,8 @@ if __name__ == '__main__':
 	for basedir in dirs:
 		dir = os.path.join('/radio',basedir,'raw/*__time__*.*')
 		basedir = os.path.join('/radio',basedir)
-		g = glob(dir)
-		g.sort()
 		for x in range(24):
+			g = glob(dir)
+			g.sort()
 			splitByTime(g,basedir)
 		selectAndConvert(basedir)
